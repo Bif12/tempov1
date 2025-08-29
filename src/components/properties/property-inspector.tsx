@@ -28,6 +28,9 @@ import {
   Palette,
   Layout,
   Type,
+  Sparkles,
+  Wand2,
+  RefreshCw,
 } from "lucide-react";
 
 interface PropertyInspectorProps {
@@ -127,7 +130,17 @@ export default function PropertyInspector({
             <PropertySection title="Typography">
               <div className="space-y-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="text">Text</Label>
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="text">Text</Label>
+                    <div className="flex space-x-1">
+                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                        <Wand2 className="h-3 w-3" />
+                      </Button>
+                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                        <RefreshCw className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </div>
                   <Textarea
                     id="text"
                     value={properties.text || ""}
@@ -136,6 +149,17 @@ export default function PropertyInspector({
                     }
                     placeholder="Enter text content"
                   />
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    <Button variant="outline" size="sm" className="text-xs h-6">
+                      Make shorter
+                    </Button>
+                    <Button variant="outline" size="sm" className="text-xs h-6">
+                      More professional
+                    </Button>
+                    <Button variant="outline" size="sm" className="text-xs h-6">
+                      Add emoji
+                    </Button>
+                  </div>
                 </div>
 
                 <div className="grid gap-2">
@@ -201,8 +225,54 @@ export default function PropertyInspector({
 
             <PropertySection title="Appearance">
               <div className="space-y-4">
+                {/* AI Style Suggestions */}
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 p-3 rounded-lg border">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center space-x-2">
+                      <Sparkles className="h-4 w-4 text-blue-500" />
+                      <span className="text-sm font-medium">
+                        AI Style Suggestions
+                      </span>
+                    </div>
+                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                      <RefreshCw className="h-3 w-3" />
+                    </Button>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-xs h-8 flex flex-col p-1"
+                    >
+                      <div className="w-full h-3 bg-gradient-to-r from-blue-400 to-blue-600 rounded mb-1"></div>
+                      Modern
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-xs h-8 flex flex-col p-1"
+                    >
+                      <div className="w-full h-3 bg-gradient-to-r from-green-400 to-emerald-600 rounded mb-1"></div>
+                      Nature
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-xs h-8 flex flex-col p-1"
+                    >
+                      <div className="w-full h-3 bg-gradient-to-r from-purple-400 to-pink-600 rounded mb-1"></div>
+                      Creative
+                    </Button>
+                  </div>
+                </div>
+
                 <div className="grid gap-2">
-                  <Label htmlFor="backgroundColor">Background Color</Label>
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="backgroundColor">Background Color</Label>
+                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                      <Wand2 className="h-3 w-3" />
+                    </Button>
+                  </div>
                   <div className="flex items-center gap-2">
                     <div
                       className="w-6 h-6 rounded border"
@@ -344,6 +414,28 @@ export default function PropertyInspector({
 
             <PropertySection title="Positioning">
               <div className="space-y-4">
+                {/* AI Spacing Autofix */}
+                <div className="bg-amber-50 dark:bg-amber-950/20 p-3 rounded-lg border border-amber-200 dark:border-amber-800">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <Wand2 className="h-4 w-4 text-amber-600" />
+                      <span className="text-sm font-medium">
+                        Spacing Autofix
+                      </span>
+                    </div>
+                    <Button
+                      size="sm"
+                      className="h-7 bg-amber-500 hover:bg-amber-600"
+                    >
+                      Apply
+                    </Button>
+                  </div>
+                  <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
+                    AI detected spacing issues. Click to auto-adjust margins and
+                    padding.
+                  </p>
+                </div>
+
                 <div className="flex items-center justify-between">
                   <Label htmlFor="flexbox">Flexbox</Label>
                   <Switch
