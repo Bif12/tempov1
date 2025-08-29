@@ -1,7 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, ChevronDown, ChevronRight, Plus } from "lucide-react";
+import {
+  Search,
+  ChevronDown,
+  ChevronRight,
+  Plus,
+  Sparkles,
+  Filter,
+  Zap,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -40,6 +48,12 @@ export default function ComponentLibraryPanel({
   onComponentAdd = () => {},
 }: ComponentLibraryPanelProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [aiSuggestions, setAiSuggestions] = useState<string[]>([
+    "Hero sections for landing pages",
+    "Contact forms with validation",
+    "Pricing tables for SaaS",
+    "Testimonial carousels",
+  ]);
   const [categories, setCategories] = useState<ComponentCategory[]>([
     {
       name: "Layout",
@@ -217,12 +231,37 @@ export default function ComponentLibraryPanel({
 
   return (
     <div className="flex flex-col h-full w-full bg-background border-r">
-      <div className="p-4 border-b">
-        <h2 className="text-lg font-semibold mb-2">Components</h2>
+      <div className="p-4 border-b space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">Components</h2>
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+            <Filter className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {/* AI Suggestions */}
+        <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 p-3 rounded-lg border">
+          <div className="flex items-center space-x-2 mb-2">
+            <Sparkles className="h-4 w-4 text-blue-500" />
+            <span className="text-sm font-medium">AI Suggestions</span>
+          </div>
+          <div className="space-y-1">
+            {aiSuggestions.slice(0, 2).map((suggestion, index) => (
+              <button
+                key={index}
+                className="w-full text-left text-xs p-2 rounded bg-background/50 hover:bg-background transition-colors border"
+                onClick={() => setSearchQuery(suggestion)}
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="relative">
           <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search components..."
+            placeholder="Search or describe what you need..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-8"
@@ -231,9 +270,18 @@ export default function ComponentLibraryPanel({
       </div>
 
       <ScrollArea className="flex-1 p-2">
-        {filteredCategories.length === 0 ? (
-          <div className="p-4 text-center text-muted-foreground">
-            No components found
+        {searchQuery && filteredCategories.length === 0 ? (
+          <div className="p-4 text-center space-y-3">
+            <div className="text-muted-foreground text-sm">
+              No components found for "{searchQuery}"
+            </div>
+            <Button
+              size="sm"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+            >
+              <Zap className="h-4 w-4 mr-2" />
+              Ask AI to Create
+            </Button>
           </div>
         ) : (
           <Accordion

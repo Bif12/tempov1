@@ -5,7 +5,6 @@ import { Send, Loader2, Sparkles, ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Tooltip,
   TooltipContent,
@@ -199,14 +198,13 @@ export default function AIChatInterface({
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center max-w-lg">
                   {suggestionChips.map((chip) => (
-                    <Badge
+                    <button
                       key={chip.id}
-                      variant="outline"
-                      className="cursor-pointer hover:bg-accent"
+                      className="px-3 py-1 text-xs border border-border rounded-full cursor-pointer hover:bg-accent transition-colors"
                       onClick={chip.action}
                     >
                       {chip.label}
-                    </Badge>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -282,14 +280,13 @@ export default function AIChatInterface({
             {messages.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-2">
                 {suggestionChips.slice(0, 3).map((chip) => (
-                  <Badge
+                  <button
                     key={chip.id}
-                    variant="outline"
-                    className="cursor-pointer hover:bg-accent text-xs"
+                    className="px-3 py-1 text-xs border border-border rounded-full cursor-pointer hover:bg-accent transition-colors"
                     onClick={chip.action}
                   >
                     {chip.label}
-                  </Badge>
+                  </button>
                 ))}
               </div>
             )}
